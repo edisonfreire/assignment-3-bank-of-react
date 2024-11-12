@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Home from './components/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -19,6 +19,30 @@ function App() {
   const mockLogIn = (logInInfo) => {
     setCurrentUser((prevUser) => ({ ...prevUser, userName: logInInfo.userName }));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const creditsResponse = await fetch('https://johnnylaicode.github.io/api/credits.json');
+        const creditsData = await creditsResponse.json();
+        setCreditList(creditsData);
+
+        const debitsResponse = await fetch('https://johnnylaicode.github.io/api/debits.json');
+        const debitsData = await debitsResponse.json();
+        setDebitList(debitsData);
+
+        // Calculate initial account balance
+        const creditsTotal = creditsData.reduce((sum, item) => sum + item.amount, 0);
+        const debitsTotal = debitsData.reduce((sum, item) => sum + item.amount, 0);
+        setAccountBalance(creditsTotal - debitsTotal);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <Router basename="/bank-of-react-starter-code">
