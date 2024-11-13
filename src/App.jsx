@@ -77,7 +77,7 @@ function App() {
 
 
   return (
-    <Router basename="/bank-of-react-starter-code">
+    <Router basename="/assignment-3-bank-of-react">
       <Routes>
         <Route 
           path="/" 
