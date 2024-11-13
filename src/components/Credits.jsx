@@ -11,7 +11,7 @@ function Credits({ credits, addCredit }) {
       const newCredit = {
         description,
         amount: creditAmount,
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
       };
       addCredit(newCredit);
       setAmount('');
@@ -28,7 +28,7 @@ function Credits({ credits, addCredit }) {
           <li key={credit.id}>
             <p>Description: {credit.description}</p>
             <p>Amount: ${parseFloat(credit.amount).toFixed(2)}</p>
-            <p>Date: {new Date(credit.date).toLocaleDateString()}</p>
+            <p>Date: {new Date(credit.date).toISOString().slice(0, 10)}</p>
           </li>
         ))}
       </ul>

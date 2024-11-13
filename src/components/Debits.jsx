@@ -28,7 +28,7 @@ function Debits({ debits, addDebit }) {
           <li key={debit.id}>
             <p>Description: {debit.description}</p>
             <p>Amount: ${parseFloat(debit.amount).toFixed(2)}</p>
-            <p>Date: {new Date(debit.date).toLocaleDateString()}</p>
+            <p>Date: {new Date(debit.date).toISOString().slice(0,10)}</p>
           </li>
         ))}
       </ul>
