@@ -1,8 +1,14 @@
-# React + Vite
+# Assignment 3 - Bank of React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Group Members
 
-Currently, two official plugins are available:
+| Name             | GitHub Username      |
+|------------------|----------------------|
+| Edison Freire  | [@edisonfreire](https://github.com/edisonfreire) |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## GitHub Pages Deployment
+
+The website is deployed on GitHub Pages. You can visit it at the following link:
+
+🔗 **[GitHub Pages Website](https://edisonfreire.github.io/assignment-3-bank-of-react)**
