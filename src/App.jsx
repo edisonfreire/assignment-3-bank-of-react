@@ -20,6 +20,7 @@ function App() {
     setCurrentUser((prevUser) => ({ ...prevUser, userName: logInInfo.userName }));
   };
 
+  // Credits Represent Income or Deposits
   const addCredit = (credit) => {
     const creditAmount = Number(credit.amount); // Ensure the amount is a number
     if (!isNaN(creditAmount)) {
@@ -32,6 +33,22 @@ function App() {
       setAccountBalance((prevBalance) => prevBalance + creditAmount);
     } else {
       console.error("Invalid amount entered:", credit);
+    }
+  };
+
+  // Debits Represent Expenses or Withdrawals
+  const addDebit = (debit) => {
+    const debitAmount = Number(debit.amount); // Ensure the amount is a number
+    if (!isNaN(debitAmount)) {
+      const newDebit = { 
+        ...debit, 
+        amount: debitAmount, 
+        date: debit.date || new Date().toISOString() 
+      };
+      setDebitList([...debitList, newDebit]);
+      setAccountBalance((prevBalance) => prevBalance - debitAmount);
+    } else {
+      console.error("Invalid amount entered:", debit);
     }
   };
 
@@ -98,8 +115,7 @@ function App() {
           element={
             <Debits 
               debits={debitList} 
-              accountBalance={accountBalance} 
-              setAccountBalance={setAccountBalance} 
+              addDebit={addDebit}
             />
           }
         />
