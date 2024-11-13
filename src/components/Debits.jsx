@@ -1,30 +1,52 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Debits({ debits }) {
+function Debits({ debits, addDebit }) {
+  const [amount, setAmount] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleAddDebit = () => {
+    const debitAmount = parseFloat(amount);
+    if (!isNaN(debitAmount) && description) {
+      const newDebit = {
+        description,
+        amount: debitAmount,
+        date: new Date().toISOString()
+      };
+      addDebit(newDebit); // Pass the full object
+      setAmount('');
+      setDescription('');
+    }
+  };
+
   return (
     <div>
-      <h1>Debits</h1>
-
-      <ul>
-        {debits.map((debit) => {
-          const date = debit.date.slice(0, 10); // Format date
-          return (
-            <li key={debit.id}>
-              {debit.amount} {debit.description} {date}
-            </li>
-          );
-        })}
-      </ul>
-
-      {/* <form onSubmit={addDebit}>
-        <input type="text" name="description" placeholder="Description" />
-        <input type="number" name="amount" placeholder="Amount" />
-        <button type="submit">Add Debit</button>
-      </form> */}
-      <br />
+      <h2>Debits</h2>
       <Link to="/">Return to Home</Link>
+      <ul>
+        {debits.map((debit) => (
+          <li key={debit.id}>
+            <p>Description: {debit.description}</p>
+            <p>Amount: ${parseFloat(debit.amount).toFixed(2)}</p>
+            <p>Date: {new Date(debit.date).toLocaleDateString()}</p>
+          </li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Enter debit description"
+      />
+      <input
+        type="number"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        placeholder="Enter debit amount"
+      />
+      <button onClick={handleAddDebit}>Add Debit</button>
     </div>
-  )
+  );
 }
 
 export default Debits
