@@ -20,6 +20,21 @@ function App() {
     setCurrentUser((prevUser) => ({ ...prevUser, userName: logInInfo.userName }));
   };
 
+  const addCredit = (credit) => {
+    const creditAmount = Number(credit.amount); // Ensure the amount is a number
+    if (!isNaN(creditAmount)) {
+      const newCredit = { 
+        ...credit, 
+        amount: creditAmount, 
+        date: credit.date || new Date().toISOString() 
+      };
+      setCreditList([...creditList, newCredit]);
+      setAccountBalance((prevBalance) => prevBalance + creditAmount);
+    } else {
+      console.error("Invalid amount entered:", credit);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,7 +64,7 @@ function App() {
       <Routes>
         <Route 
           path="/" 
-          element={<Home accountBalance={accountBalance} />} 
+          element={<Home accountBalance={accountBalance.toFixed(2)} />} 
         />
         <Route
           path="/userProfile"
@@ -74,8 +89,7 @@ function App() {
           element={
             <Credits 
               credits={creditList} 
-              accountBalance={accountBalance} 
-              setAccountBalance={setAccountBalance} 
+              addCredit={addCredit}
             />
           }
         />
