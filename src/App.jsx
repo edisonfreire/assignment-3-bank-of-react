@@ -105,6 +105,7 @@ function App() {
           path="/credits"
           element={
             <Credits 
+              accountBalance={accountBalance}
               credits={creditList} 
               addCredit={addCredit}
             />
@@ -114,6 +115,7 @@ function App() {
           path="/debits"
           element={
             <Debits 
+              accountBalance={accountBalance}
               debits={debitList} 
               addDebit={addDebit}
             />
