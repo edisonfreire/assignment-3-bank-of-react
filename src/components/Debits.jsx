@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AccountBalance from './AccountBalance';
 
-function Debits({ debits, addDebit }) {
+function Debits({ debits, addDebit, accountBalance }) {
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
 
@@ -23,6 +24,7 @@ function Debits({ debits, addDebit }) {
     <div>
       <h2>Debits</h2>
       <Link to="/">Return to Home</Link>
+      <AccountBalance accountBalance={accountBalance} />
       <ul>
         {debits.map((debit) => (
           <li key={debit.id}>

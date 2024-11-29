@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import AccountBalance from "./AccountBalance";
 
-function Credits({ credits, addCredit }) {
+function Credits({ credits, addCredit, accountBalance }) {
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
 
@@ -23,6 +24,7 @@ function Credits({ credits, addCredit }) {
     <div>
       <h2>Credits</h2>
       <Link to="/">Return to Home</Link>
+      <AccountBalance accountBalance={accountBalance} />
       <ul>
         {credits.map((credit) => (
           <li key={credit.id}>
